@@ -1,4 +1,6 @@
-const TaskFrame = () => {
+import { Todo } from "../models/todo.model";
+
+const TaskFrame = ({ todo }: {todo: Todo}) => {
     return ( 
         <>
             <div className="card py-5 px-6 flex flex-col">
@@ -7,7 +9,7 @@ const TaskFrame = () => {
                     <img className="cursor-pointer icon mb-4" src="/assets/images/icons/close.png" alt="" />
                 </div>
                 <div className="task-detail mb-8">
-                    <h3 className="text-lg font-bold mb-8">Task</h3>
+                    <h3 className="text-lg font-bold mb-8">{todo.title}</h3>
                     <div className="date flex gap-2 mb-2">
                         <img className="icon" src="/assets/images/icons/calendar.png" alt="" />
                         <span className="text-base font-medium">20th January, 2023</span>

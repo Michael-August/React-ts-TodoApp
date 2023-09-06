@@ -11,6 +11,8 @@ const Main = () => {
     const [simpleDates, setSimpleDates] = useState<Date[]>([])
     const [activeDate, setActyiveDate] = useState<Date>(new Date())
     const [todos, setTodos] = useState<Todo[]>([])
+    const[displayOnright, setDisplayOnright] = useState<String>('calendar')
+    const [singleTodo, setSingleTodo] = useState<Todo>({ id: 0, userId: 0, title: "", completed: false })
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10
 
@@ -62,7 +64,14 @@ const Main = () => {
     }
 
     const onCompleted = (todoId: number) => {
-        
+        const todo = todos.find(todo => todo.id === todoId) as Todo
+        todo.completed = !todo.completed
+        setTodos([...todos, todo])
+    }
+
+    const receiveTodo = (todoId: number) => {
+        setSingleTodo(todos.find(todo => todo.id === todoId) as Todo)
+        setDisplayOnright('singleTodo')
     }
 
     useEffect(() => {
@@ -95,7 +104,7 @@ const Main = () => {
                         </div>
                         {
                             currentData.map((todo) => (
-                                <Task todo={todo} onCompleted={onCompleted} checked={todo.completed} key={todo.id} />
+                                <Task todo={todo} onCompleted={onCompleted} receiveTodo={receiveTodo} checked={todo.completed} key={todo.id} />
                             ))
                         }
                     </div>
@@ -103,8 +112,8 @@ const Main = () => {
                     <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} goToPage={goToPage} />
                 </div>
                 <div className="right-side pl-6">
-                    {/* <TaskFrame /> */}
-                    <TaskInput />
+                    {displayOnright === 'singleTodo' && <TaskFrame todo={singleTodo} />}
+                    {displayOnright === 'todoInput' && <TaskInput />}
                 </div>
             </div>
         </>

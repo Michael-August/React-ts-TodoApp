@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { Todo } from "../models/todo.model";
+import { SingleTodoProps } from "../models/singleTodo.model";
 
-const Task: React.FC<{todo: Todo, onCompleted: any, checked: boolean}> = ({ todo, onCompleted, checked }) => {
-    // const [checked, setChecked] = useState(false)
-
-    // const handleChecked = () => {
-    //     setChecked(!checked)
-    // }
+const Task = ({ todo, onCompleted, checked, receiveTodo }: SingleTodoProps) => {
     return ( 
         <>
             <div className="task px-6 py-4 mb-4 flex items-center justify-between">
@@ -17,7 +13,7 @@ const Task: React.FC<{todo: Todo, onCompleted: any, checked: boolean}> = ({ todo
                             <span onClick={() => onCompleted(todo.id)}  className="checkmark"></span>
                         </label>
                     </div>
-                    <div className="item task-click flex flex-col">
+                    <div onClick={() => receiveTodo(todo.id)} className="item task-click flex flex-col">
                         <span className={todo.completed == true ? 'strike' : ''}>{todo.title}</span>
                         <span className={todo.completed == true ? "text-zinc-500 strike" : 'text-zinc-500'}>10:30 am - 11:30 am</span>
                     </div>
