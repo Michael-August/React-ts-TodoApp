@@ -13,6 +13,9 @@ const Main = () => {
     const [todos, setTodos] = useState<Todo[]>([])
     const[displayOnright, setDisplayOnright] = useState<String>('calendar')
     const [singleTodo, setSingleTodo] = useState<Todo>({ id: 0, userId: 0, title: "", completed: false })
+    const [isEditting, setIsEdittting] = useState(false)
+    const [itemToEdit, setItemToEdit] = useState<Todo>({ id: 0, userId: 0, title: "", completed: false })
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10
 
@@ -63,10 +66,53 @@ const Main = () => {
         }
     }
 
+    const deleteTodo = (todoId: number) => {
+        setTodos(todos.filter(todo => todo.id !== todoId))
+        setDisplayOnright('')
+    }
+
+    const openEditForm = async (todoId: number) => {
+        setIsEdittting(true)
+
+        try {
+            const response = await fetch(`${ApiPath}/${todoId}`)
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            setItemToEdit(data)
+            setDisplayOnright('todoInput')
+        } catch (error) {
+            alert(`Fetch error: ${error}`)
+        }
+    }
+
+    const editTodo = () => {
+
+    }
+
+    const openCreateForm = (arg: boolean) => {
+        setIsEdittting(!arg)
+        setDisplayOnright('todoInput')
+    }
+
+    const handleTodoInput = (data: Todo) => {
+        if(!isEditting) {
+            data.id = todos[todos.length - 1].id + 1
+            data.userId = Math.floor(Math.random() * (100 - 1 + 1)) + 1
+            setTodos([data, ...todos])
+            return
+        }
+        const todo = todos.find(todo => todo.id === data.id) as Todo
+        todo.title = data.title
+        setTodos([...todos])
+    }
+
     const onCompleted = (todoId: number) => {
         const todo = todos.find(todo => todo.id === todoId) as Todo
         todo.completed = !todo.completed
-        setTodos([...todos, todo])
+        setTodos([...todos])
     }
 
     const receiveTodo = (todoId: number) => {
@@ -81,7 +127,7 @@ const Main = () => {
 
     return ( 
         <>
-            <Header />
+            <Header openCreateForm={openCreateForm} />
             <div className="main-body mt-8 px-8 gap-6">
                 <div className="left-side pr-5">
                     <div className="simple-date mb-8">
@@ -112,8 +158,8 @@ const Main = () => {
                     <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} goToPage={goToPage} />
                 </div>
                 <div className="right-side pl-6">
-                    {displayOnright === 'singleTodo' && <TaskFrame todo={singleTodo} />}
-                    {displayOnright === 'todoInput' && <TaskInput />}
+                    {displayOnright === 'singleTodo' && <TaskFrame setDisplayOnright={setDisplayOnright} openEditForm={openEditForm} deleteTodo={deleteTodo} todo={singleTodo} />}
+                    {displayOnright === 'todoInput' && <TaskInput handleTodoInput={handleTodoInput} setDisplayOnright={setDisplayOnright} itemToEdit={itemToEdit} isEditting={isEditting} setItemToEdit={setItemToEdit} />}
                 </div>
             </div>
         </>
