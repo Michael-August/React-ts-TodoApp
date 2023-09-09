@@ -166,7 +166,7 @@ const Main = () => {
                     <hr />
                     <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} goToPage={goToPage} />
                     <div className="mobile-input hidden md:hidden xs:flex items-start justify-between">
-                        <input onFocus={() => setDisplayOnright('todoInput')} className="bg-transparent text-base outline-transparent" placeholder="Input task" type="text" />
+                        <input disabled={true} onFocus={() => setDisplayOnright('todoInput')} className="bg-transparent text-base outline-transparent" placeholder="Input task" type="text" />
                         <img src="/assets/images/icons/mic.png" alt="" />
                     </div>
                 </div>
