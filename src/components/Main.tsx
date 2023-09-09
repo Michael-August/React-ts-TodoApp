@@ -50,7 +50,7 @@ const Main = () => {
         }
 
         setSimpleDates(next11Days);  
-        setMobileDates(next11Days.splice(0, 6))
+        setMobileDates([...next11Days].splice(0, 6))
     }
 
     const getTodos = async () => {
@@ -125,7 +125,7 @@ const Main = () => {
     return ( 
         <>
             <Header openCreateForm={openCreateForm} />
-            <div className="main-body mt-8 md:px-8 xs:px-4 gap-6">
+            <div className="main-body md:mt-8 xs:mt-3 md:px-8 xs:px-4 gap-6">
                 <div className="left-side md:border-r-2 xs:border-r-0 md:pr-5 xs:pr-0">
                     <div className="simple-date mb-8">
                         <h3 className="text-base font-semibold">September 2023</h3>
