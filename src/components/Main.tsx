@@ -16,6 +16,8 @@ const Main = () => {
     const [isEditting, setIsEdittting] = useState(false)
     const [itemToEdit, setItemToEdit] = useState<Todo>({ id: 0, userId: 0, title: "", completed: false })
 
+    const [todoInputState, setTodoInputState] = useState('')
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10
 
@@ -32,6 +34,10 @@ const Main = () => {
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
     };
+
+    const onTodoInputChange = (e: any) => {
+        setTodoInputState(e.target.value)
+    }
 
     const goToPage = (pageNumber: number) => {
         if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -106,6 +112,24 @@ const Main = () => {
         setTodos([...todos])
     }
 
+    const addTaskFromMobile = (e: any) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+
+            setIsEdittting(false)
+
+            let data: Todo = {
+                id: todos[todos.length - 1].id + 1,
+                userId: Math.floor(Math.random() * (100 - 1 + 1)) + 1,
+                title: todoInputState,
+                completed: false
+            }
+
+            handleTodoInput(data)
+        }
+        
+    }
+
     const onCompleted = (todoId: number) => {
         const todo = todos.find(todo => todo.id === todoId) as Todo
         todo.completed = !todo.completed
@@ -166,7 +190,7 @@ const Main = () => {
                     <hr />
                     <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} goToPage={goToPage} />
                     <div className="mobile-input hidden md:hidden xs:flex items-start justify-between">
-                        <input disabled={true} onClick={() => setDisplayOnright('todoInput')} className="bg-transparent text-base outline-transparent" placeholder="Input task" type="text" />
+                        <input onChange={onTodoInputChange} onKeyUp={addTaskFromMobile} onFocus={() => setDisplayOnright('taskInput')} className="bg-transparent text-base outline-transparent" placeholder="Input task" type="text" />
                         <img src="/assets/images/icons/mic.png" alt="" />
                     </div>
                 </div>
