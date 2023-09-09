@@ -1,5 +1,4 @@
 import { useState } from "react";
-import 'react-calendar/dist/Calendar.css';
 
 type ValuePiece = Date | null;
 
@@ -9,13 +8,13 @@ const TodoCalendar = () => {
     const [date, setDate] = useState(new Date());
     // const [value, onChange] = useState<Value>(new Date());
 
-    const onChange = (selectedDate: Date) => {
+    const onDateChange = (selectedDate: Date) => {
         setDate(selectedDate);
     };
     return ( 
         <>
             <div>
-                {/* <ExternalCalendar onChange={onChange} value={date} /> */}
+                
             </div>
         </>
     );

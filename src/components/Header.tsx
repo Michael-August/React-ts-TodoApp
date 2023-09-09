@@ -28,12 +28,12 @@ const Header = ({openCreateForm}: {openCreateForm: Function}) => {
 
     return ( 
         <>
-            <div className="header px-8 flex items-center justify-between">
+            <div className="header md:px-8 xs:px-4 flex items-center justify-between">
                 <div className="greetings">
-                    <h1 className="text-3xl text-#101828 mt-12 font-semibold">Good {timeOfDay}</h1>
+                    <h1 className="md:text-3xl xs:text-2xl text-#101828 md:mt-12 xs:mt-3 font-semibold">Good {timeOfDay}</h1>
                     <span className="text-gray-600 text-base">You got some task to do. </span>
                 </div>
-                <div className="btn">
+                <div className="btn md:block xs:hidden">
                     <button onClick={() => openCreateForm(true)} className="flex items-center justify-center px-4 py-2 text-white font-semibold rounded-lg bg-custom-blue">
                         <img src="/assets/images/icons/plus.png" alt="" />
                         Create New Task

@@ -9,6 +9,7 @@ import { Todo } from "../models/todo.model";
 
 const Main = () => {
     const [simpleDates, setSimpleDates] = useState<Date[]>([])
+    const [mobileDates, setMobileDates] = useState<Date[]>([])
     const [activeDate, setActyiveDate] = useState<Date>(new Date())
     const [todos, setTodos] = useState<Todo[]>([])
     const[displayOnright, setDisplayOnright] = useState<String>('calendar')
@@ -88,10 +89,6 @@ const Main = () => {
         }
     }
 
-    const editTodo = () => {
-
-    }
-
     const openCreateForm = (arg: boolean) => {
         setIsEdittting(!arg)
         setDisplayOnright('todoInput')
@@ -123,21 +120,32 @@ const Main = () => {
     useEffect(() => {
         getTodos()
         getDatesFor11DaysAhead()
+        setMobileDates(simpleDates.splice(0, 6))
     }, [])
 
     return ( 
         <>
             <Header openCreateForm={openCreateForm} />
-            <div className="main-body mt-8 px-8 gap-6">
-                <div className="left-side pr-5">
+            <div className="main-body mt-8 md:px-8 xs:px-4 gap-6">
+                <div className="left-side md:border-r-2 xs:border-r-0 md:pr-5 xs:pr-0">
                     <div className="simple-date mb-8">
                         <h3 className="text-base font-semibold">September 2023</h3>
-                        <div className="date-thumbnail-list gap-4 flex items-center">
+                        <div className="date-thumbnail-list gap-4 flex items-center md:flex xs:hidden">
                             {
                                 simpleDates.map(date => (
                                     <div className={activeDate.getDate() === date.getDate() ? 'active date-thumbnail mt-4 rounded-lg' : 'date-thumbnail mt-4 rounded-lg'}>
                                         <span>{days[date.getDay()]}</span>
                                         <span>{date.getDate()}</span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div className="date-thumbnail-list gap-1 flex items-center xs:flex md:hidden">
+                            {
+                                mobileDates.map(date => (
+                                    <div className={activeDate.getDate() === date.getDate() ? 'active date-thumbnail mt-4 rounded-lg' : 'date-thumbnail mt-4 rounded-lg'}>
+                                        <span className="text-xs">{days[date.getDay()]}</span>
+                                        <span className="text-xs">{date.getDate()}</span>
                                     </div>
                                 ))
                             }
@@ -148,19 +156,26 @@ const Main = () => {
                         <div className="heading">
                             <h3 className="text-base font-semibold mb-4">My Tasks</h3>
                         </div>
-                        {
-                            currentData.map((todo) => (
-                                <Task todo={todo} onCompleted={onCompleted} receiveTodo={receiveTodo} checked={todo.completed} key={todo.id} />
-                            ))
-                        }
+                        <div className="list md:max-h-none md:overflow-auto xs:max-h-72 xs:overflow-scroll">
+                            {
+                                currentData.map((todo) => (
+                                    <Task todo={todo} onCompleted={onCompleted} receiveTodo={receiveTodo} checked={todo.completed} key={todo.id} />
+                                ))
+                            }
+                        </div>
                     </div>
                     <hr />
                     <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} goToPage={goToPage} />
+                    <div className="mobile-input hidden md:hidden xs:flex items-start justify-between">
+                        <input onFocus={() => setDisplayOnright('todoInput')} className="bg-transparent text-base outline-transparent" placeholder="Input task" type="text" />
+                        <img src="/assets/images/icons/mic.png" alt="" />
+                    </div>
                 </div>
-                <div className="right-side pl-6">
+                <div className="right-side md:pl-6 xs:pl-0">
                     {displayOnright === 'singleTodo' && <TaskFrame setDisplayOnright={setDisplayOnright} openEditForm={openEditForm} deleteTodo={deleteTodo} todo={singleTodo} />}
                     {displayOnright === 'todoInput' && <TaskInput handleTodoInput={handleTodoInput} setDisplayOnright={setDisplayOnright} itemToEdit={itemToEdit} isEditting={isEditting} setItemToEdit={setItemToEdit} />}
                 </div>
+                
             </div>
         </>
     );

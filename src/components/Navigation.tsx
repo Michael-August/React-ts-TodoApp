@@ -1,7 +1,7 @@
 const NavBar = () => {
     return ( 
         <>
-            <div className="nav flex items-center justify-between px-8 py-6">
+            <div className="nav flex items-center justify-between md:px-8 py-6 xs:px-4">
                 <div className="logo">
                     <h1 className="text-2xl font-bold">ToDo </h1>
                 </div>

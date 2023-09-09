@@ -8,6 +8,9 @@ module.exports = {
       colors: {
         'custom-blue': '#3F5BF6',
       },
+      screens: {
+        'xs': '375px'
+      },
     },
   },
   plugins: [],

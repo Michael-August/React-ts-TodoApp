@@ -42,13 +42,16 @@ const TaskInput = ({ isEditting, itemToEdit, setItemToEdit, setDisplayOnright, h
     
     return (  
         <>
-            <div className="card py-5 px-6 mb-4 flex flex-col">
+            <div className="card md:py-5 xs:py-2 md:px-6 xs:px-4 mb-4 flex flex-col">
                 <div className="close-btn flex items-center justify-between">
                     <h3 className="text-lg font-semibold mb-8">{isEditting === true ? 'Edit Task' : 'Add Task'}</h3>
                     <img onClick={() => setDisplayOnright('')} className="cursor-pointer icon mb-4" src="/assets/images/icons/close.png" alt="" />
                 </div>
                 <div className="form-control mb-4">
-                    <textarea onChange={handleChange} value={isEditting == true && itemToEdit.title ? itemToEdit.title : taskFormState.title} name="title" className="input px-4 py-3" id=""></textarea>
+                    <textarea onChange={handleChange} 
+                        placeholder="Add Task"
+                        value={isEditting == true && itemToEdit.title ? itemToEdit.title : taskFormState.title} 
+                        name="title" className="input px-4 py-3" id=""></textarea>
                 </div>
                 <div className="config flex items-center mb-4">
                     <div className="today calendar px-4 py-2 mr-9 flex items-center gap-2">

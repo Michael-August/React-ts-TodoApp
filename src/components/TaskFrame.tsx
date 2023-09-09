@@ -3,7 +3,7 @@ import { Todo } from "../models/todo.model";
 const TaskFrame = ({ todo, deleteTodo, openEditForm, setDisplayOnright }: {todo: Todo, deleteTodo: Function, openEditForm: Function, setDisplayOnright: any}) => {
     return ( 
         <>
-            <div className="card py-5 px-6 flex flex-col">
+            <div className="card py-5 md:px-6 xs:px-4 flex flex-col">
                 <div className="close-btn flex items-center justify-between">
                     <div></div>
                     <img onClick={() => setDisplayOnright('')} className="cursor-pointer icon mb-4" src="/assets/images/icons/close.png" alt="" />
