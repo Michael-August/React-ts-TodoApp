@@ -50,6 +50,7 @@ const Main = () => {
         }
 
         setSimpleDates(next11Days);  
+        setMobileDates(next11Days.splice(0, 6))
     }
 
     const getTodos = async () => {
@@ -119,8 +120,7 @@ const Main = () => {
     useEffect(() => {
         getTodos()
         getDatesFor11DaysAhead()
-        setMobileDates(simpleDates.splice(0, 6))
-    }, [todos, simpleDates ])
+    }, [])
 
     return ( 
         <>
