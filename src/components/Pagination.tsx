@@ -1,5 +1,4 @@
 const Pagination = ({ currentPage, totalPages, onPageChange, goToPage }: {currentPage: number, totalPages: number, onPageChange: any, goToPage: any}) => {
-    const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1); 
     const pageNeighbours = 5
 
     const leftBound = Math.max(1, currentPage - pageNeighbours);

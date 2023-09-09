@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import Task from "./Task";
 import Pagination from "./Pagination";
-import TodoCalendar from "./ToDoCalendar";
 import TaskFrame from "./TaskFrame";
 import TaskInput from "./TaskInput";
 import { Todo } from "../models/todo.model";

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TaskInputProps } from "../models/taskInput.model";
-import { Todo } from "../models/todo.model";
 
 const TaskInput = ({ isEditting, itemToEdit, setItemToEdit, setDisplayOnright, handleTodoInput }: TaskInputProps) => {
 
