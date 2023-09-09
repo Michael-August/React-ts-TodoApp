@@ -9,7 +9,7 @@ import { Todo } from "../models/todo.model";
 const Main = () => {
     const [simpleDates, setSimpleDates] = useState<Date[]>([])
     const [mobileDates, setMobileDates] = useState<Date[]>([])
-    const [activeDate, setActyiveDate] = useState<Date>(new Date())
+    const [activeDate] = useState<Date>(new Date())
     const [todos, setTodos] = useState<Todo[]>([])
     const[displayOnright, setDisplayOnright] = useState<String>('calendar')
     const [singleTodo, setSingleTodo] = useState<Todo>({ id: 0, userId: 0, title: "", completed: false })
