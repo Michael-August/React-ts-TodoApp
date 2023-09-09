@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Todo } from "../models/todo.model";
 import { SingleTodoProps } from "../models/singleTodo.model";
 
 const Task = ({ todo, onCompleted, checked, receiveTodo }: SingleTodoProps) => {
@@ -14,8 +12,8 @@ const Task = ({ todo, onCompleted, checked, receiveTodo }: SingleTodoProps) => {
                         </label>
                     </div>
                     <div onClick={() => receiveTodo(todo.id)} className="item task-click flex flex-col">
-                        <span className={todo.completed == true ? 'strike' : ''}>{todo.title}</span>
-                        <span className={todo.completed == true ? "text-zinc-500 strike" : 'text-zinc-500'}>10:30 am - 11:30 am</span>
+                        <span className={todo.completed === true ? 'strike' : ''}>{todo.title}</span>
+                        <span className={todo.completed === true ? "text-zinc-500 strike" : 'text-zinc-500'}>10:30 am - 11:30 am</span>
                     </div>
                 </div>
                 <div className="date">

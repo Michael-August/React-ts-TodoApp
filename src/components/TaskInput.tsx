@@ -49,7 +49,7 @@ const TaskInput = ({ isEditting, itemToEdit, setItemToEdit, setDisplayOnright, h
                 <div className="form-control mb-4">
                     <textarea onChange={handleChange} 
                         placeholder="Add Task"
-                        value={isEditting == true && itemToEdit.title ? itemToEdit.title : taskFormState.title} 
+                        value={isEditting === true && itemToEdit.title ? itemToEdit.title : taskFormState.title} 
                         name="title" className="input px-4 py-3" id=""></textarea>
                 </div>
                 <div className="config flex items-center mb-4">
