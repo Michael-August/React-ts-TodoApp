@@ -120,7 +120,7 @@ const Main = () => {
         getTodos()
         getDatesFor11DaysAhead()
         setMobileDates(simpleDates.splice(0, 6))
-    }, [simpleDates])
+    }, [simpleDates, ApiPath])
 
     return ( 
         <>
